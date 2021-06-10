@@ -15,7 +15,7 @@ extern int load(int x,int y);
 int main()
 {
 	int result=0;
-	int count=9;
+	int count=2;
 	result = load(0x0,count+1);
 	printf("Sum of nos 1 to %d is %d\n",count,result);
 }
@@ -46,7 +46,7 @@ loop:
 
 <h2> Algorithm </h2>
 
-<img src="" alt="algorithm"/>
+<img src="./algo.PNG" alt="algorithm"/>
 
 <h2> Execution </h2>
 
@@ -69,6 +69,6 @@ chmod 777 rv32im.sh
 
 <h2> Output </h2>
 
-<img src="" alt="out1"/>
+<img src="./output1.PNG" alt="out1"/>
 
-<img src="" alt="out2"/>
+<img src="./output2.PNG" alt="out2"/>
