@@ -49,3 +49,26 @@ loop:
 <img src="" alt="algorithm"/>
 
 <h2> Execution </h2>
+
+```
+To compile
+riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o custom.o custom.c load.S
+
+To run and see the output
+spike pk custom.o
+
+```
+
+To run it on our RISCV core created using verilog
+
+```
+Place the custom.c and load.S file in the riscv_workshop_collaterals/labs
+chmod 777 rv32im.sh
+./rv32im.sh
+```
+
+<h2> Output </h2>
+
+<img src="" alt="out1"/>
+
+<img src="" alt="out2"/>
