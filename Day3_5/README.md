@@ -96,3 +96,40 @@ m4_asm(ADD, r10, r0, r0)             // Initialize r10 (a0) to 0.
 <h4> Waveforms </h4>
 
 <img src="waveforms.PNG" alt="out1"/>
+
+
+# Day 5 Pipelined RISC-V processor implementation
+
+<p> Here we improve the performace the single cycle RISCV processor by increasing the clock frequency and pipelining it. Here we implement all the instructions of RV64I processor including load and stores. We create a 5 stage pipeline . The load is implemented with a 2 cycle latency and other functionalities are same. We have register file which can perform 2 read operations and 1 write operation. The memory can have a single read and write operation. </p>
+
+<img src="complete.PNG" alt="cir1"/>
+
+<h2> Testing </h2>
+
+<p> The core is tested using the similar program which can compute sum of numbers from 1 to N including store,load and jump operations.</p>
+
+```
+m4_asm(ADD, r10, r0, r0)             // Initialize r10 (a0) to 0.
+   // Function:
+   m4_asm(ADD, r14, r10, r0)            // Initialize sum register a4 with 0x0
+   m4_asm(ADDI, r12, r10, 1010)         // Store count of 10 in register a2.
+   m4_asm(ADD, r13, r10, r0)            // Initialize intermediate sum register a3 with 0
+   // Loop:
+   m4_asm(ADD, r14, r13, r14)           // Incremental addition
+   m4_asm(ADDI, r13, r13, 1)            // Increment intermediate register by 1
+   m4_asm(BLT, r13, r12, 1111111111000) // If a3 is less than a2, branch to label named <loop>
+   m4_asm(ADD, r10, r14, r0)            // Store final result to register a0 so that it can be read by main program
+   m4_asm(SW, r0, r10, 10000)
+   m4_asm(LW, r17, r0, 10000)
+   
+   // Optional:
+   m4_asm(JAL, r7, 00000000000000000000) // Done. Jump to itself (infinite loop). (Up to 20-bit signed immediate plus implicit 0 bit (unlike JALR) provides byte address; last immediate bit should also be 0)
+   m4_define_hier(['M4_IMEM'], M4_NUM_INSTRS)
+   
+```
+
+<img src="sample_pgm.PNG" alt="res"/>
+
+<h4> Waveforms </h4>
+
+<img src="waveforms1.PNG" alt="waveforms1"/>
